@@ -18,9 +18,6 @@ namespace View
         private void Start() => 
             TimeModule = new TimeModule(this);
 
-        private void OnDisable() => 
-            TimeModule.Dispose();
-
         public void UpdateTime(DateTime currentTime)
         {
             UpdateText(currentTime);
@@ -29,9 +26,10 @@ namespace View
 
         private void AnimateArrow(DateTime currentTime)
         {
-            float hourRotation = (currentTime.Hour) * 30 + (currentTime.Minute / 60f) * 30;
-            float minuteRotation = currentTime.Minute * 6;
-            float secondArrow = currentTime.Second * 6;
+            float hourRotation = (currentTime.Hour) * Constants.CorrectorHour 
+                                 + (currentTime.Minute / Constants.DividerSeconds) * Constants.CorrectorHour;
+            float minuteRotation = currentTime.Minute * Constants.CorrectorMinute;
+            float secondArrow = currentTime.Second * Constants.CorrectorMinute;
 
             _hourArrow.DOLocalRotate(new Vector3(0f, 0f, -hourRotation), Constants.ClockSpeed);
             _minuteArrow.DOLocalRotate(new Vector3(0f, 0f, -minuteRotation), Constants.ClockSpeed);

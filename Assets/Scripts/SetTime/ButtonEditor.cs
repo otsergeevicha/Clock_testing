@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using View;
@@ -27,30 +26,22 @@ namespace SetTime
             _inputField.MinutesOnChanged -= SetMinutes;
         }
 
+        public bool IsEdit => 
+            _toggle.isOn;
+
         private void SetHours(int newHours) =>
             UpdateTime(newHours, _clock.TimeModule.CachedTimeData.Minute);
 
         private void SetMinutes(int newMinutes) =>
             UpdateTime(_clock.TimeModule.CachedTimeData.Hour, newMinutes);
 
-        private void UpdateTime(int newHours, int newMinutes)
-        {
-            _clock.TimeModule.TimeData.Time = $"{newHours}:{newMinutes}:{_clock.TimeModule.CachedTimeData.Second}";
-
-            _clock.TimeModule.CachedTimeData = DateTime.Parse(_clock.TimeModule.TimeData.Time);
-            _clock.UpdateTime(_clock.TimeModule.CachedTimeData);
-        }
+        private void UpdateTime(int newHours, int newMinutes) => 
+            _clock.TimeModule.SetNewTime(newHours, newMinutes);
 
         public void OnPressed()
         {
             _iconButton.sprite = _toggle.isOn ? _icons[0] : _icons[1];
             _canvasInputField.enabled = _toggle.isOn;
-
-            if (!_toggle.isOn)
-            {
-                _inputField.FieldHours.text = string.Empty;
-                _inputField.FieldMinutes.text = string.Empty;
-            }
         }
     }
 }
