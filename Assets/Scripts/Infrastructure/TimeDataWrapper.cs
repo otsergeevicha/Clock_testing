@@ -11,13 +11,13 @@ namespace Infrastructure
         public void SetCurrentTime(string resultRequest)
         {
             ServerTimeResponse response = JsonUtility.FromJson<ServerTimeResponse>(resultRequest);
-            DateTime dateTime = DateTimeOffset.FromUnixTimeSeconds(response.unixtime).LocalDateTime;
+            DateTime dateTime = DateTimeOffset.FromUnixTimeMilliseconds(response.time).LocalDateTime;
             Time = dateTime.ToString(Constants.ParseCurrentFormat);
         }
     }
 
     public struct ServerTimeResponse
     {
-        public int unixtime;
+        public long time;
     }
 }

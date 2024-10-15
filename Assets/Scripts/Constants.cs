@@ -1,6 +1,6 @@
 ﻿public static class Constants
 {
-    public const string UrlTime = "https://worldtimeapi.org/api/timezone/Europe/Moscow";
+    public const string UrlTime = "https://yandex.com/time/sync.json?geo=1";
     public const string ParseCurrentFormat = "yyyy-MM-dd HH:mm:ss";
     public const string SetCurrentFormat = "HH:mm:ss";
     
